@@ -1,0 +1,3 @@
+useDynLib(birdsong.tools, .registration=TRUE)
+importFrom(Rcpp, evalCpp)
+exportPattern("^[[:alpha:]]+")
