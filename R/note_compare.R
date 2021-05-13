@@ -12,6 +12,10 @@
 #' 2 original unit tables, the square difference in the intervals and a 
 #' logical indicating whether a note match was found. The difference is 
 #' NA if no matching note was found. 
+#' 
+#' @importFrom tibble tibble
+#' @importFrom dplyr filter mutate
+#' @importFrom data.table between
 #' @export
 #'
 #' @examples note = tibble(start = 0.35, end = 0.49, sound.files = "JS001.wav", pos = 2)
@@ -27,7 +31,7 @@ note_compare <- function(note, unit_table){
   
   #find the corresponding note
   candidate_notes = candidate_notes %>%
-    mutate(match = data.table::between(note$midpoint,
+    dplyr::mutate(match = data.table::between(note$midpoint,
                                        candidate_notes$start,
                                        candidate_notes$end)
     )
