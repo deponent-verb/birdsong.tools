@@ -7,9 +7,12 @@ becky = read_csv("~/work/PhD/Data/Files for Anthony/Files for Anthony/JavaSparro
 
 anthony = read_csv("~/work/PhD/Data/note_excision/datasets/measurements.csv")
 
-#copy Becky's labels for now
+#data cleaning
 
-anthony$sound.files = becky$sound.files[1:nrow(anthony)]
+anthony = anthony %>%
+  dplyr::rename(sound.files = filename,
+                start = interval_start, 
+                end = interval_end)
 
 library(tidyverse)
 
@@ -26,13 +29,14 @@ recording = becky_note$sound.files
 candidate_notes = anthony %>%
   dplyr::filter(sound.files == recording)
 
-#find the note
+#find the corresponding note
 candidate_notes = candidate_notes %>%
   mutate(match = data.table::between(becky_note$midpoint,
                                      candidate_notes$interval_start,
                                      candidate_notes$interval_end)
          )
 
+#compute difference between becky's note and corresponding matched note
 if(any(candidate_notes$match)){
   match = T
   matched_note = candidate_notes[which(candidate_notes$match),]
