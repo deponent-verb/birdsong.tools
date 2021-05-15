@@ -10,12 +10,13 @@
 #'
 #' @return A tibble with the sound file, the positions of the notes in the 
 #' 2 original unit tables, the square difference in the intervals and a 
-#' logical indicating whether a note match was found. The difference is 
-#' NA if no matching note was found. 
+#' logical indicating whether a note match was found. If no match it found, 
+#' the difference is the square interval length of the input note. 
 #' 
 #' @importFrom tibble tibble
 #' @importFrom dplyr filter mutate
 #' @importFrom data.table between
+#' @importFrom magrittr %>%
 #' @export
 #'
 #' @examples note = tibble(start = 0.35, end = 0.49, sound.files = "JS001.wav", pos = 2)
@@ -23,15 +24,33 @@
 #' note_compare(note, unit_table)
 note_compare <- function(note, unit_table){
   
+  #check inputs
+  
+  #check all the correct columns are present
+  correct_cols = c("start", "end", "sound.files", "pos")
+  if(sum(colnames(note) %in% correct_cols ) != length(correct_cols) ){
+    stop("note argument does not have the correct columns. See documentation.")
+  }
+  
+  correct_cols = c("start", "end", "sound.files", "pos")
+  if(sum( colnames(unit_table) %in% correct_cols ) != length(correct_cols) ){
+    stop("unit_table argument does not have the correct columns. See documentation.")
+  }
+  
+  #function starts here ----
+  
+  #take name of soundfile which generated selected note
   recording = note$sound.files
   
   #take all the notes from the same recording
   candidate_notes = unit_table %>%
     dplyr::filter(sound.files == recording)
   
+  note_midpoint = (note$end + note$start)/2
+  
   #find the corresponding note
   candidate_notes = candidate_notes %>%
-    dplyr::mutate(match = data.table::between(note$midpoint,
+    dplyr::mutate(match = data.table::between(note_midpoint,
                                        candidate_notes$start,
                                        candidate_notes$end)
     )
@@ -40,20 +59,23 @@ note_compare <- function(note, unit_table){
   if(any(candidate_notes$match)){
     match = T
     matched_note = candidate_notes[which(candidate_notes$match),]
-    diff = (becky_note$start - matched_note$start)^2 +
-      (becky_note$end - matched_note$end)^2
+    diff = (note$start - matched_note$start)^2 +
+      (note$end - matched_note$end)^2
+    matched_note_pos = matched_note$pos
   } else {
-    diff = NA
+    diff = (note$end-note$start)^2
     match = F
+    matched_note_pos = NA
   }
   
   result = tibble::tibble(
     sound_file = recording, 
-    becky_note_pos = becky_note$selec,
-    anthony_note_pos = 1 , #change later
+    becky_note_pos = note$pos,
+    anthony_note_pos = matched_note_pos ,
     difference = diff,
     matched = match
   )
   
   return(result)
 }
+
