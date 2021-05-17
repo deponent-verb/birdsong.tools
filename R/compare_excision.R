@@ -22,15 +22,24 @@
 #' table2 = tibble(start = c(0.37, 0.6), end = c(0.45, 0.7), sound.files = "JS001.wav", pos =c(2,4))
 compare_excision <- function(table1,table2){
   
+  #match notes from table1 to table2 and compute difference ----
+  
   #get a list of all notes in table1
-  note_list = split(table1, row(table1[,1]))
+  note_list1 = split(table1, row(table1[,1]))
   
   #attempt match each note to something in table2 and compute difference
-  diffs = lapply(note_list, note_compare, unit_table = table2) 
+  diffs1 = lapply(note_list1, note_compare, unit_table = table2) 
+  
+  #match notes from table2 to table1 and compute difference ----
+  
+  note_list2 = split(table2, row(table2[,2]))
+  
+  #attempt match each note to something in table2 and compute difference
+  diffs2 = lapply(note_list2, note_compare, unit_table = table1) 
   
   #bind everything together into one data frame
-  result = plyr::rbind.fill(diffs)
+  result = plyr::rbind.fill( c(diffs1,diffs2) )
   
-  #5:08 start
+  return(result)
 }
 

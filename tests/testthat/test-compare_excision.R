@@ -1,5 +1,49 @@
+#test function for compare_excision
+
+compare_excision2 <- function(table1,table2){
+  
+  n_table1 = nrow(table1)
+  diffs1 = lapply(1:n_table1, c)
+  #loop through all elements of table1 and compare with table2
+  for(i in 1:n_table1){
+    note = table1[i,]
+    diffs1[[i]] = note_compare(note, table2)
+  }
+  
+  n_table2 = nrow(table2)
+  diffs2 = lapply(1:n_table2, c)
+  #loop through all elements of table2 and compare with table1
+  for(i in 1:n_table2){
+    note = table2[i,]
+    diffs2[[i]] = note_compare(note, table1)
+  }
+  
+  diff = c(diffs1,diffs2) 
+  res = plyr::rbind.fill(diff)
+  return(res)
+}
+
 test_that("compare_excision works",{
-  expect_equal(1,1)
+  
+  #construct 1st unit table
+  unit_table_p1 = tibble::tibble(start = c(0.30, 0.55, 1.5, 2.5), end = c(0.51, 0.7, 2.2, 3), 
+                               sound.files = "JS001.wav", pos =c(1,2,3,4))
+  unit_table_p2 = tibble::tibble(start = c(0.2, 0.4, 0.55, 2.5), end = c(0.35, 0.5, 0.8, 3), 
+                               sound.files = "JS002.wav", pos =c(1,2,3,4))
+  unit_table1 = rbind(unit_table_p1,unit_table_p2)
+  
+  #construct 2nd unit table
+  unit_table2_p1 = tibble::tibble(start = c(0.25, 0.65, 2), end = c(0.45, 0.75, 2.7), 
+                                 sound.files = "JS001.wav", pos =c(1,2,3))
+  unit_table2_p2 = tibble::tibble(start = c(0.15, 0.50, 2.75), end = c(0.30, 0.75, 3.2), 
+                                 sound.files = "JS002.wav", pos =c(1,2,3))
+  unit_table2 = rbind(unit_table2_p1,unit_table2_p2)
+  
+  
+  output = compare_excision(unit_table1,unit_table2)
+  ans = compare_excision2(unit_table1,unit_table2)
+  
+  expect_equal(output,ans)
   
 })
 
