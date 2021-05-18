@@ -4,14 +4,14 @@
 #' found in another unit table. 
 #'
 #' @param note : A unit table tibble containing the original sound file, 
-#' start/end times of the note and the note position. 
+#' start/end times of the note, the note position and the note class. 
 #' @param unit_table : A tibble of notes ontaining the original sound file, 
-#' start/end times of the note and the note position. 
+#' start/end times of the note position and the note class.
 #'
 #' @return A tibble with the sound file, the positions of the notes in the 
-#' 2 original unit tables, the square difference in the intervals and a 
-#' logical indicating whether a note match was found. If no match it found, 
-#' the difference is the square interval length of the input note. 
+#' 2 original unit tables, the square difference in the intervals, a 
+#' logical indicating whether a note match was found and the note class. 
+#' If no match it found, the difference is the square interval length of the input note. 
 #' 
 #' @importFrom tibble tibble
 #' @importFrom dplyr filter mutate
@@ -19,7 +19,7 @@
 #' @importFrom magrittr %>%
 #' @export
 #'
-#' @examples note = tibble(start = 0.35, end = 0.49, sound.files = "JS001.wav", pos = 2)
+#' @examples note = tibble(start = 0.35, end = 0.49, sound.files = "JS001.wav", pos = 2, note_label = "Curve)
 #' unit_table = tibble(start = c(0.35, 0.55), end = c(0.49, 0.7), sound.files = "JS001.wav", pos =c(2,3))
 #' note_compare(note, unit_table)
 note_compare <- function(note, unit_table){
@@ -27,7 +27,7 @@ note_compare <- function(note, unit_table){
   #check inputs
   
   #check all the correct columns are present
-  correct_cols = c("start", "end", "sound.files", "pos")
+  correct_cols = c("start", "end", "sound.files", "pos", "note_label")
   if(sum(colnames(note) %in% correct_cols ) != length(correct_cols) ){
     stop("note argument does not have the correct columns. See documentation.")
   }
@@ -73,7 +73,8 @@ note_compare <- function(note, unit_table){
     becky_note_pos = note$pos,
     anthony_note_pos = matched_note_pos ,
     difference = diff,
-    matched = match
+    matched = match,
+    note_label = note$note_label 
   )
   
   return(result)

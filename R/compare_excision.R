@@ -4,16 +4,17 @@
 #' Table1 corresponds to manually excised notes, Table2 corresponds
 #' to computationally excised notes. The function goes through each 
 #' note in Table1, tries to match it to a note in Table2 and 
-#' quantifies the difference.  
+#' quantifies the difference. The process is repeated to compare
+#' notes in Table2 to those in Table1. 
 #'
 #' @param table1: A unit table tibble containing the original sound file, 
-#' start/end times of the note and the note position.
+#' start/end times of the note,the note position and note_label.  
 #' @param table2: A unit table tibble containing the original sound file, 
-#' start/end times of the note and the note position.
+#' start/end times of the note and the note position and note_label.
 #'
 #' @return Tibble containing the sound file, note positions in tables 1 and 2,
-#' the square difference in the note intervals and a logical (matched) indicating
-#' whether a matching note was found.  
+#' the square difference in the note intervals, a logical (matched) indicating
+#' whether a matching note was found and the class of the original note. 
 #' @export 
 #' 
 #' @importFrom plyr rbind.fill

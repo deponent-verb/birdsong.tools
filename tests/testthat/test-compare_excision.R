@@ -27,16 +27,16 @@ test_that("compare_excision works",{
   
   #construct 1st unit table
   unit_table_p1 = tibble::tibble(start = c(0.30, 0.55, 1.5, 2.5), end = c(0.51, 0.7, 2.2, 3), 
-                               sound.files = "JS001.wav", pos =c(1,2,3,4))
+                               sound.files = "JS001.wav", pos =c(1,2,3,4), note_label = "Curve")
   unit_table_p2 = tibble::tibble(start = c(0.2, 0.4, 0.55, 2.5), end = c(0.35, 0.5, 0.8, 3), 
-                               sound.files = "JS002.wav", pos =c(1,2,3,4))
+                               sound.files = "JS002.wav", pos =c(1,2,3,4), note_label = "Curve2")
   unit_table1 = rbind(unit_table_p1,unit_table_p2)
   
   #construct 2nd unit table
   unit_table2_p1 = tibble::tibble(start = c(0.25, 0.65, 2), end = c(0.45, 0.75, 2.7), 
-                                 sound.files = "JS001.wav", pos =c(1,2,3))
+                                 sound.files = "JS001.wav", pos =c(1,2,3), note_label = "Unclassifed")
   unit_table2_p2 = tibble::tibble(start = c(0.15, 0.50, 2.75), end = c(0.30, 0.75, 3.2), 
-                                 sound.files = "JS002.wav", pos =c(1,2,3))
+                                 sound.files = "JS002.wav", pos =c(1,2,3),note_label = "Unclassifed")
   unit_table2 = rbind(unit_table2_p1,unit_table2_p2)
   
   
