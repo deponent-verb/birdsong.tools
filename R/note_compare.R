@@ -19,9 +19,11 @@
 #' @importFrom magrittr %>%
 #' @export
 #'
-#' @examples note = tibble(start = 0.35, end = 0.49, sound.files = "JS001.wav", pos = 2, note_label = "Curve)
+#' @examples 
+#' note = tibble(start = 0.35, end = 0.49, sound.files = "JS001.wav", pos = 2, note_label = "Curve")
 #' unit_table = tibble(start = c(0.35, 0.55), end = c(0.49, 0.7), sound.files = "JS001.wav", pos =c(2,3))
 #' note_compare(note, unit_table)
+
 note_compare <- function(note, unit_table){
   
   #check inputs

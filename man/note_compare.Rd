@@ -8,23 +8,23 @@ note_compare(note, unit_table)
 }
 \arguments{
 \item{note}{: A unit table tibble containing the original sound file, 
-start/end times of the note and the note position.}
+start/end times of the note, the note position and the note class.}
 
 \item{unit_table}{: A tibble of notes ontaining the original sound file, 
-start/end times of the note and the note position.}
+start/end times of the note position and the note class.}
 }
 \value{
 A tibble with the sound file, the positions of the notes in the 
-2 original unit tables, the square difference in the intervals and a 
-logical indicating whether a note match was found. If no match it found, 
-the difference is the square interval length of the input note.
+2 original unit tables, the square difference in the intervals, a 
+logical indicating whether a note match was found and the note class. 
+If no match it found, the difference is the square interval length of the input note.
 }
 \description{
 Takes a note from one unit table and compares it with the corresponding note
 found in another unit table.
 }
 \examples{
-note = tibble(start = 0.35, end = 0.49, sound.files = "JS001.wav", pos = 2)
+note = tibble(start = 0.35, end = 0.49, sound.files = "JS001.wav", pos = 2, note_label = "Curve")
 unit_table = tibble(start = c(0.35, 0.55), end = c(0.49, 0.7), sound.files = "JS001.wav", pos =c(2,3))
 note_compare(note, unit_table)
 }
