@@ -2,6 +2,7 @@
 
 export(compare_excision)
 export(note_compare)
+export(note_match)
 importFrom(data.table,between)
 importFrom(dplyr,filter)
 importFrom(dplyr,mutate)

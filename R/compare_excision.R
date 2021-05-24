@@ -19,8 +19,9 @@
 #' 
 #' @importFrom plyr rbind.fill
 #'
-#' @examples table1 = tibble(start = c(0.35, 0.55), end = c(0.49, 0.7), sound.files = "JS001.wav", pos =c(2,3))
-#' table2 = tibble(start = c(0.37, 0.6), end = c(0.45, 0.7), sound.files = "JS001.wav", pos =c(2,4))
+#' @examples table1 = tibble(start = c(0.35, 0.55), end = c(0.49, 0.7), sound.files = "JS001.wav")
+#' table2 = tibble(start = c(0.37, 0.6), end = c(0.45, 0.7), sound.files = "JS001.wav")
+#' compare_excision(table1,table2)
 compare_excision <- function(table1,table2){
   
   #match notes from table1 to table2 and compute difference ----
