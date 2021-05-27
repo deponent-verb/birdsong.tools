@@ -33,13 +33,28 @@ add_transitions <- function(unit_table){
   #obtain list of songs
   song_list = unit_table$sound.files %>% unique()
   
-  #loop over each song
-  for(song in song_list){
-    print(song)
+  #make a tibble for each song
+  song_tables = lapply(song_list, function(song){
+    unit_table %>%
+      dplyr::filter(sound.files == song) %>%
+      #ensure rows are in ascending order by pos
+      dplyr::arrange(pos)
+  })
+  
+  test %>% 
+    dplyr::mutate(transition = 1)
+  
+  transitions = rep(NA, nrow(test))
+  
+  for(i in 1:nrow(test)){
+    if(i == nrow(test)){
+      transitions[i] = "end"
+    } else {
+      transitions[i] = paste(test$note_label[i], test$note_label[i + 1])
+    }
   }
   
- song_table = unit_table %>%
-   dplyr::filter(sound.files == "")
+  
   
   return(0)
 }
