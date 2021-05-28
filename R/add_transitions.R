@@ -13,10 +13,11 @@
 #' 
 #' @importFrom magrittr %>%
 #' @importFrom dplyr filter
+#' @importFrom data.table rbindlist
 #' 
 #' @export
 #'
-#' @examples unit_table = tibble(start = c(0.37, 0.6, 0.2, 1.8), end = c(0.45, 0.7, 0.4, 2), pos = c(1,2,1,2),sound.files = c("JS001.wav","JS001.wav","JS002.wav","JS002.wav") , note_label = "Curve")
+#' @examples unit_table = tibble::tibble(start = c(0.37, 0.6, 0.2, 1.8), end = c(0.45, 0.7, 0.4, 2), pos = c(1,2,1,2),sound.files = c("JS001.wav","JS001.wav","JS002.wav","JS002.wav") , note_label = "Curve")
 #' add_transitions(unit_table)
 add_transitions <- function(unit_table){
   
@@ -41,20 +42,9 @@ add_transitions <- function(unit_table){
       dplyr::arrange(pos)
   })
   
-  test %>% 
-    dplyr::mutate(transition = 1)
+  #add transition columns for each song
+  updated_song_tables = lapply(song_tables, add_transitions_dep)
+  res = data.table::rbindlist(updated_song_tables)
   
-  transitions = rep(NA, nrow(test))
-  
-  for(i in 1:nrow(test)){
-    if(i == nrow(test)){
-      transitions[i] = "end"
-    } else {
-      transitions[i] = paste(test$note_label[i], test$note_label[i + 1])
-    }
-  }
-  
-  
-  
-  return(0)
+  return(res)
 }
