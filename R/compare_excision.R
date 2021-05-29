@@ -19,8 +19,10 @@
 #' 
 #' @importFrom plyr rbind.fill
 #'
-#' @examples table1 = tibble(start = c(0.35, 0.55), end = c(0.49, 0.7), sound.files = "JS001.wav")
-#' table2 = tibble(start = c(0.37, 0.6), end = c(0.45, 0.7), sound.files = "JS001.wav")
+#' @examples table1 = tibble::tibble(start = c(0.30, 0.55, 1.5, 2.5), end = c(0.51, 0.7, 2.2, 3), 
+#' sound.files = "JS001.wav", pos =c(1,2,3,4), note_label = "Curve")
+#' table2 = tibble::tibble(start = c(0.25, 0.65, 2), end = c(0.45, 0.75, 2.7), 
+#' sound.files = "JS001.wav", pos =c(1,2,3), note_label = "Unclassifed")
 #' compare_excision(table1,table2)
 compare_excision <- function(table1,table2){
   
