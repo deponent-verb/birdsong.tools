@@ -12,7 +12,7 @@
 #' @return
 #' 
 #' @importFrom magrittr %>%
-#' @importFrom dplyr filter
+#' @importFrom dplyr filter arrange
 #' @importFrom data.table rbindlist
 #' 
 #' @export
