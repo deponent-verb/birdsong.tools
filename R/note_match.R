@@ -19,7 +19,7 @@
 #' @export
 #'
 #' @examples comp_table = tibble(start = c(0.35, 0.55), end = c(0.49, 0.7), sound.files = "JS001.wav")
-#' manual_table = tibble(start = c(0.37, 0.6), end = c(0.45, 0.7), sound.files = "JS001.wav", note_class = "Curve")
+#' manual_table = tibble(start = c(0.37, 0.6), end = c(0.45, 0.7), sound.files = "JS001.wav", note_label = "Curve")
 #' note_match(comp_table, manual_table)
 note_match <- function(comp_table, manual_table){
   
@@ -29,7 +29,7 @@ note_match <- function(comp_table, manual_table){
     stop("comp_table does not have the correct columns. See documentation.")
   }
   
-  correct_cols = c("start", "end", "sound.files", "note_class")
+  correct_cols = c("start", "end", "sound.files", "note_label")
   if(sum( colnames(manual_table) %in% correct_cols ) != length(correct_cols) ){
     stop("manual_table argument does not have the correct columns. See documentation.")
   }
@@ -55,7 +55,7 @@ note_match <- function(comp_table, manual_table){
     #save match note if it exists, otherwise record unclassified
     if(any(match_vec)){
       match_index = which(match_vec)
-      classes[i] =  manual_table_notes$note_class[match_index]
+      classes[i] =  manual_table_notes$note_label[match_index]
     } else {
       classes[i] = "unclassified"
     }
