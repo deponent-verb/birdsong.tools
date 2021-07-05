@@ -10,5 +10,5 @@
 #'
 #' @examples
 check_overlap = function(table, note){
-  
+
 }
