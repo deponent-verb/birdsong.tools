@@ -25,6 +25,6 @@ classified note.
 }
 \examples{
 comp_table = tibble(start = c(0.35, 0.55), end = c(0.49, 0.7), sound.files = "JS001.wav")
-manual_table = tibble(start = c(0.37, 0.6), end = c(0.45, 0.7), sound.files = "JS001.wav", note_class = "Curve")
+manual_table = tibble(start = c(0.37, 0.6), end = c(0.45, 0.7), sound.files = "JS001.wav", note_label = "Curve")
 note_match(comp_table, manual_table)
 }

@@ -4,14 +4,12 @@
 \alias{add_metadata}
 \title{add_metadata function}
 \usage{
-add_metadata(data, metadata, ID)
+add_metadata(data, metadata)
 }
 \arguments{
 \item{data}{: A dataframe with ID and some other columns}
 
 \item{metadata:}{A metadata table with ID}
-
-\item{ID:}{A character string indicating the ID column}
 }
 \value{
 The original dataframe with the additional columns from the 
