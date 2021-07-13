@@ -24,12 +24,12 @@ compute_oscores_dep <- function(note, table){
   })
   #compute overlaps
   olaps = sapply(table_notelist, function(man_note){
-    check_overlap(note1 = man_note, note2 = c(note$start,note$end))
+    check_overlap(note1 = man_note, note2 = c(note[1],note[2]))
   })
   #compute overlap scores with the best note
   x = which.max(olaps)
   res = overlap_score(note1 = unlist(table_notelist[x]),
-                      note2 = c(note$start,note$end))
+                      note2 = c(note[1],note[2]))
   
-  return(res)
+  return(as.numeric(res))
 }
