@@ -11,18 +11,23 @@
 #' @param comp_table: A unit table tibble containing the original sound file, 
 #' start/end times of the note,the note position and note_label. 
 #'
-#' @return
+#' @return A numeric vector containing the totals of the 3 overlaps scores. 
 #' @export
 #'
 #' @examples table1 = tibble::tibble(start = c(0.30, 0.55, 1.5, 2.5), end = c(0.51, 0.7, 2.2, 3), 
-#' sound.files = "JS001.wav", pos =c(1,2,3,4), note_label = "Curve")
+#' sound.files = c(rep("JS001.wav",2),rep("JS002.wav",2)) , pos =c(1,2,3,4), note_label = "Curve")
 #' table2 = tibble::tibble(start = c(0.25, 0.65, 2), end = c(0.45, 0.75, 2.7), 
-#' sound.files = "JS001.wav", pos =c(1,2,3), note_label = "Unclassifed")
+#' sound.files = c(rep("JS001.wav",2),rep("JS002.wav",2)), pos =c(1,2,3), note_label = "Unclassifed")
 #' compute_oscores(table1,table2)
 compute_oscores = function(manual_table, comp_table){
   
+  #split tables by recording
+  truth_tables = partition_unit_table(manual_table)
+  comp_tables = partition_unit_table(comp_table)
+  
+  
   #get a list of all notes comp_table
-  comp_notelist = split(comp_table, row(comp_table[,1]))
+  #comp_notelist = split(comp_table, row(comp_table[,1]))
   
   # function(note){
   #   recording = note$sound.files
