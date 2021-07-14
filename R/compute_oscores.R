@@ -25,6 +25,13 @@ compute_oscores = function(manual_table, comp_table){
   truth_tables = partition_unit_table(manual_table)
   comp_tables = partition_unit_table(comp_table)
   
+  #compute scores for each table pair
+  #lapply(table1 = truth_tables, table2 = comp_tables, FUN= compute_oscores_dep2)
+  
+  purrr::map2(.x = truth_tables, .y = comp_tables, .f = compute_oscores_dep2)
+                                           #write loop to test
+  
+  
   
   #get a list of all notes comp_table
   #comp_notelist = split(comp_table, row(comp_table[,1]))

@@ -14,7 +14,7 @@ start/end times of the note,the note position and note_label.}
 start/end times of the note,the note position and note_label.}
 }
 \value{
-
+A numeric vector containing the totals of the 3 overlaps scores.
 }
 \description{
 Compares a computational unit table against a manual unit table using the 
@@ -24,8 +24,8 @@ overlap.
 }
 \examples{
 table1 = tibble::tibble(start = c(0.30, 0.55, 1.5, 2.5), end = c(0.51, 0.7, 2.2, 3), 
-sound.files = "JS001.wav", pos =c(1,2,3,4), note_label = "Curve")
+sound.files = c(rep("JS001.wav",2),rep("JS002.wav",2)) , pos =c(1,2,3,4), note_label = "Curve")
 table2 = tibble::tibble(start = c(0.25, 0.65, 2), end = c(0.45, 0.75, 2.7), 
-sound.files = "JS001.wav", pos =c(1,2,3), note_label = "Unclassifed")
+sound.files = c(rep("JS001.wav",2),rep("JS002.wav",2)), pos =c(1,2,3), note_label = "Unclassifed")
 compute_oscores(table1,table2)
 }
