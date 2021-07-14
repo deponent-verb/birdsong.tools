@@ -5,9 +5,11 @@
 #' 
 #'
 #' @param table1: A unit table tibble containing the original sound file, 
-#' start/end times of the note,the note position and note_label. 
+#' start/end times of the note,the note position and note_label.The soundfile 
+#' must be the same as table2. 
 #' @param table2: A unit table tibble containing the original sound file, 
-#' start/end times of the note,the note position and note_label.  
+#' start/end times of the note,the note position and note_label. The soundfile 
+#' must be the same as table1. 
 #'
 #' @return A numeric vector with the sum of each of the 3 overlaps scores.
 #' @export
@@ -18,6 +20,15 @@
 #' sound.files = "JS001.wav", pos =c(1,2,3,4), note_label = "Curve")
 #' compute_oscores_dep2(table1,table2)
 compute_oscores_dep2 <- function(table1, table2){
+  
+  #check the same recording is being used
+  recording1 = unique(table1$sound.files)
+  recording2 = unique(table2$sound.files)
+  if(recording1 != recording2){
+    stop("Tables have different recordings.")
+  }
+  
+  
   notes = split(table2, row(table2[,1]))
   notelist = lapply(notes, function(table_row){
     note = c(table_row$start, table_row$end)
@@ -29,8 +40,7 @@ compute_oscores_dep2 <- function(table1, table2){
   #rename columns labels for ease of debugging
   colnames(score_table) = c("sc1","sc2","sc3")
   #add scores for all the notes
-  score_table = score_table %>%
-   dplyr::mutate(stats = sc1 + sc2 + sc3)
+  scores = colSums(score_table)
   
-  return(score_table$stats)
+  return(scores)
 }

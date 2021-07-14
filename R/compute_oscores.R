@@ -16,8 +16,8 @@
 #'
 #' @examples table1 = tibble::tibble(start = c(0.30, 0.55, 1.5, 2.5), end = c(0.51, 0.7, 2.2, 3), 
 #' sound.files = c(rep("JS001.wav",2),rep("JS002.wav",2)) , pos =c(1,2,3,4), note_label = "Curve")
-#' table2 = tibble::tibble(start = c(0.25, 0.65, 2), end = c(0.45, 0.75, 2.7), 
-#' sound.files = c(rep("JS001.wav",2),rep("JS002.wav",2)), pos =c(1,2,3), note_label = "Unclassifed")
+#' table2 = tibble::tibble(start = c(0.25, 0.65, 1.6, 2.4), end = c(0.45, 0.75, 2.1, 2.9), 
+#' sound.files = c(rep("JS001.wav",2),rep("JS002.wav",2)), pos =c(1,2,3,4), note_label = "Unclassifed")
 #' compute_oscores(table1,table2)
 compute_oscores = function(manual_table, comp_table){
   
@@ -28,8 +28,8 @@ compute_oscores = function(manual_table, comp_table){
   #compute scores for each table pair
   #lapply(table1 = truth_tables, table2 = comp_tables, FUN= compute_oscores_dep2)
   
-  purrr::map2(.x = truth_tables, .y = comp_tables, .f = compute_oscores_dep2)
-                                           #write loop to test
+  table_scores = purrr::map2(.x = truth_tables, .y = comp_tables, .f = compute_oscores_dep2)
+                                      
   
   
   
