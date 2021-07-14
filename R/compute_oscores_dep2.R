@@ -28,7 +28,6 @@ compute_oscores_dep2 <- function(table1, table2){
     stop("Tables have different recordings.")
   }
   
-  
   notes = split(table2, row(table2[,1]))
   notelist = lapply(notes, function(table_row){
     note = c(table_row$start, table_row$end)

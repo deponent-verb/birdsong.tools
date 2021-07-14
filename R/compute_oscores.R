@@ -26,39 +26,12 @@ compute_oscores = function(manual_table, comp_table){
   comp_tables = partition_unit_table(comp_table)
   
   #compute scores for each table pair
-  #lapply(table1 = truth_tables, table2 = comp_tables, FUN= compute_oscores_dep2)
-  
   table_scores = purrr::map2(.x = truth_tables, .y = comp_tables, .f = compute_oscores_dep2)
+  #bind everything into one table
+  score_table = dplyr::bind_rows(table_scores)
                                       
+  #sum across all the tables
+  final_scores = colSums(score_table)
   
-  
-  
-  #get a list of all notes comp_table
-  #comp_notelist = split(comp_table, row(comp_table[,1]))
-  
-  # function(note){
-  #   recording = note$sound.files
-  #   #get smaller table with notes from the same recording
-  #   song_table = comp_table %>%
-  #     dplyr::filter(sound.files == recording)
-  #   #compute overlap between computational note and notes in the manual table
-  #   song_table = song_table %>% 
-  #     dplyr::mutate(olap = check_overlap( c(note$start,note$end) , c(start,end)))
-  # }
-  
+  return(final_scores)
 }
-
-# note1 = c(0.1,0.7)
-# note2 = c(0.5,0.9)
-
-#case of 1 overlap
-
-#case of multiple overlaps, pick biggest one
-
-# rng = cbind(pmin(ranges[,1], ranges[,2]), pmax(ranges[,1], ranges[,2]),
-#             pmin(ranges[,3], ranges[,4]), pmax(ranges[,3], ranges[,4]))
-# 
-# olap = (rng[,1] <= rng[,4]) & (rng[,2] >= rng[,3])
-# 
-# (pmin(ranges[,1], ranges[,2]) <= pmax(ranges[,3], ranges[,4])) &
-#   (pmax(ranges[,1], ranges[,2]) >= pmin(ranges[,3], ranges[,4]))
