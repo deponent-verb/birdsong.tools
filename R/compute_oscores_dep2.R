@@ -13,6 +13,9 @@
 #'
 #' @return A numeric vector with the sum of each of the 3 overlaps scores.
 #' @export
+#' 
+#' @importFrom tibble tibble
+#' @importFrom magrittr %>% 
 #'
 #' @examples table1 = tibble::tibble(start = c(0.30, 0.55, 1.5, 2.5), end = c(0.51, 0.7, 2.2, 3), 
 #' sound.files = "JS001.wav", pos =c(1,2,3,4), note_label = "Curve")
@@ -28,6 +31,8 @@ compute_oscores_dep2 <- function(table1, table2){
     stop("Tables have different recordings.")
   }
   
+  #turn table2 into a tibble to make the split rows work
+  table2 = tibble::tibble(table2)
   notes = split(table2, row(table2[,1]))
   notelist = lapply(notes, function(table_row){
     note = c(table_row$start, table_row$end)

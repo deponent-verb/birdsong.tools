@@ -13,6 +13,9 @@
 #'
 #' @return A numeric vector containing the totals of the 3 overlaps scores. 
 #' @export
+#' 
+#' @importFrom purrr map2
+#' @importFrom dplyr bind_rows
 #'
 #' @examples table1 = tibble::tibble(start = c(0.30, 0.55, 1.5, 2.5), end = c(0.51, 0.7, 2.2, 3), 
 #' sound.files = c(rep("JS001.wav",2),rep("JS002.wav",2)) , pos =c(1,2,3,4), note_label = "Curve")
