@@ -24,6 +24,11 @@
 #' compute_oscores(table1,table2)
 compute_oscores = function(manual_table, comp_table){
   
+  #ensure recordings are in the same order for both tables
+  #we are relying on both input tables already having the same set of recordings
+  manual_table = manual_table[order(manual_table$sound.files),]
+  comp_table = comp_table[order(comp_table$sound.files),]
+  
   #split tables by recording
   truth_tables = partition_unit_table(manual_table)
   comp_tables = partition_unit_table(comp_table)
