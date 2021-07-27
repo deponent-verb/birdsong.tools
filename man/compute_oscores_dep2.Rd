@@ -8,10 +8,12 @@ compute_oscores_dep2(table1, table2)
 }
 \arguments{
 \item{table1:}{A unit table tibble containing the original sound file, 
-start/end times of the note,the note position and note_label.}
+start/end times of the note,the note position and note_label.The soundfile 
+must be the same as table2.}
 
 \item{table2:}{A unit table tibble containing the original sound file, 
-start/end times of the note,the note position and note_label.}
+start/end times of the note,the note position and note_label. The soundfile 
+must be the same as table1.}
 }
 \value{
 A numeric vector with the sum of each of the 3 overlaps scores.
