@@ -12,8 +12,8 @@ start/end times of the note,the note position and note_label. Notes are
 all from the same recording.}
 }
 \value{
-The original unit table with an addition logical column indicating
-whether a note has been assigned to the introduction.
+A logical vector indicating
+whether each note has been assigned to the introduction.
 }
 \description{
 Dependency for identify_intro. Takes a unit table and assigns notes
