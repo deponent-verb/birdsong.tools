@@ -26,8 +26,11 @@ get_gaps <- function(unit_table){
     for(i in 2:nrow(note_table)){
       gap_dur[i-1] = note_table$start[i] - note_table$end[i-1]
     }
+    #add transitions column
+    trans = add_transitions(note_table)$transitions[1:nrow(note_table)-1]
     res = tibble::tibble( sound.files = note_table$sound.files[1], 
-                          gap_dur, pos = seq(length(gap_dur)))
+                          gap_dur, pos = seq(length(gap_dur)),
+                          transitions = trans)
     return(res)
   })
   
