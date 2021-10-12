@@ -1,4 +1,5 @@
 test_that("partition_unit_table works",{
+  #test1
   unit_table = tibble::tibble(start = c(0.37, 0.6, 0.8, 1.8), end = c(0.45, 0.7, 0.9, 2), pos = c(1,2,3,4),
                               sound.files = c( rep("JS001.wav",2), rep("JS002.wav",2) ), 
                               note_label = c("A","B","C","D"))
@@ -15,4 +16,13 @@ test_that("partition_unit_table works",{
   )
   
   expect_equal(output, ans)
+  
+  #test2
+  unit_table = tibble::tibble(start = c(0.37, 0.6, 0.8, 1.8), end = c(0.45, 0.7, 0.9, 2), pos = c(1,2,3,4),
+                              sound.files = "JS001.wav", 
+                              note_label = c("A","B","C","D"))
+  
+  output = partition_unit_table(unit_table)
+  expect_equal(output, list(unit_table))
+  
 })

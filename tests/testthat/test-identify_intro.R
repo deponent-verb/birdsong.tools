@@ -1,13 +1,15 @@
 test_that("identify_intro works",{
-  unit_table1 = tibble::tibble(start = c(0.2, 0.6, 0.75, 1.1, 1.8, 2.5, 4),
-                              end = c(0.25, 0.7, 0.9, 1.6, 1.9, 3, 4.2), 
-                              pos = seq(7),
-                              sound.files = "JS001.wav"
+  unit_table1 = tibble::tibble(start = c(0.2, 0.6, 0.75, 1.1, 1.8, 2.5),
+                              end = c(0.25, 0.7, 0.9, 1.6, 1.9, 3), 
+                              pos = seq(6),
+                              sound.files = "JS001.wav",
+                              note_label = rep(c("Curve","Wave"),3)
                               )
   
   unit_table2 = tibble::tibble(start = c(0.21, 0.6, 0.75, 1.1, 1.8, 2, 3.1,4.3),
                               end = c(0.25, 0.7, 0.9, 1.7, 1.9, 3, 4.2,4.8),
-                              pos = seq(8),sound.files = "JS002.wav"
+                              pos = seq(8),sound.files = "JS002.wav",
+                              note_label = rep(c("Curve","Wave"),4)
                               )
   
   unit_table = rbind(unit_table1,unit_table2)

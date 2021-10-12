@@ -29,17 +29,3 @@ partition_unit_table <- function(unit_table){
   
   return(song_tables)
 }
-
-# becky = readr::read_csv("~/work/PhD/Files for Anthony/Files for Anthony/JavaSparrow_UnitTable.csv")
-
-
-# becky %>%
-#   dplyr::filter(sound.files == "JS0002-20110427-001.wav")
-# 
-# song1 = "JS0002-20110427-001.wav"
-# 
-# becky %>%
-#   dplyr::filter(sound.files == song1)
-# 
-# unit_table %>%
-#   dplyr::filter(sound.files == "JS0002-20110427-001.wav")

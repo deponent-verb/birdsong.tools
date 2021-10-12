@@ -15,8 +15,27 @@
 #' get_gaps(unit_table)
 get_gaps <- function(unit_table){
   
+  #check columns
+
+  correct_cols = c("start", "end", "pos", "sound.files")
+  if(sum(colnames(unit_table) %in% correct_cols ) != length(correct_cols) ){
+    stop("Incorrect columns. See documentation")
+  }
+  
   #separate the unit table by recording
   song_tables = partition_unit_table(unit_table)
+  
+  # #testing
+  # lapply(song_tables, function(note_table){
+  #   gap_dur = rep(NA, nrow(note_table) - 1)
+  #   
+  #   for(i in 2:nrow(note_table)){
+  #     gap_dur[i-1] = note_table$start[i] - note_table$end[i-1]
+  #   }
+  #   #return(gap_dur)
+  #   trans = add_transitions(note_table)$transitions[1:nrow(note_table)-1]
+  #   #need to add note classes!
+  # })
   
   #compute gaps for each unit table
   gap_tables = lapply(song_tables, function(note_table){

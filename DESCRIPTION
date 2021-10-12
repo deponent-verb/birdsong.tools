@@ -16,5 +16,5 @@ Imports: Rcpp (>= 1.0.5),
          magrittr,
          purrr
 LinkingTo: Rcpp
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Encoding: UTF-8
