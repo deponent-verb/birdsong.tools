@@ -4,6 +4,7 @@
 #'
 #' @param data : A dataframe with ID and some other columns 
 #' @param metadata: A metadata table with ID
+#' @param col: Vector of column indices, indicating which columns of metadata to copy over.
 #' 
 #' @importFrom magrittr %>%
 #' @importFrom dplyr bind_rows
@@ -12,21 +13,31 @@
 #' metadata.
 #' @export
 #'
-#' @examples data = tibble::tibble(x = c(1,2), ID = c("JS001", "JS002"))
-#' metadata = tibble::tibble(y = c(3,4), ID = c("JS001", "JS002"))
+#' @examples data = tibble::tibble(Bird.ID = c("JS001", "JS002"),x = c(1,2))
+#' metadata = tibble::tibble(Bird.ID = c("JS001", "JS002"),y = c(3,4), z = c(5,6))
+#' add_metadata(data,metadata)
 add_metadata <- function(data, metadata){
   
+  #check input ID column
+  if("Bird.ID" %in% colnames(data) == F){
+    stop("Bird.ID column missing in data argument.")
+  }
+  
+  if("Bird.ID" %in% colnames(metadata) == F){
+    stop("Bird.ID column missing in metadata argument.")
+  }
+  
   #check ID columns match
-  check =  all(is.element(data$ID, metadata$ID))
+  check =  all(is.element(data$Bird.ID, metadata$Bird.ID))
   if(check == FALSE){
     stop("Mismatching IDs.")
   }
   
-  #take variables from the metadata table based on ID
-  meta_rows = lapply(as.list(data$ID), function(ID){
-    row_index = which(metadata$ID == ID)
+  #take variables from the metadata table based on Bird.ID
+  meta_rows = lapply(as.list(data$Bird.ID), function(Bird.ID){
+    row_index = which(metadata$Bird.ID == Bird.ID)
     meta_info = metadata[row_index,]
-    meta_info$ID = NULL
+    meta_info$Bird.ID = NULL
     return(meta_info)
     #return(metadata)
   })
