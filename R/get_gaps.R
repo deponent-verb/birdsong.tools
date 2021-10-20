@@ -11,13 +11,13 @@
 #' 
 #' @importFrom tibble tibble
 #'
-#' @examples unit_table = tibble::tibble(start = c(0.37, 0.6, 0.75, 0.2, 1.8, 2.5), end = c(0.45, 0.7, 0.9, 0.4, 2, 3), pos = c(1,2,3,1,2,3),sound.files = c(rep("JS001.wav",3),rep("JS002.wav", 3)), note_label = "Curve")
+#' @examples unit_table = tibble::tibble(start = c(0.37, 0.6, 0.75, 0.2, 1.8, 2.5), end = c(0.45, 0.7, 0.9, 0.4, 2, 3), selec = c(1,2,3,1,2,3),sound.files = c(rep("JS001.wav",3),rep("JS002.wav", 3)), note_label = "Curve")
 #' get_gaps(unit_table)
 get_gaps <- function(unit_table){
   
   #check columns
 
-  correct_cols = c("start", "end", "pos", "sound.files")
+  correct_cols = c("start", "end", "selec", "sound.files", "note_label")
   if(sum(colnames(unit_table) %in% correct_cols ) != length(correct_cols) ){
     stop("Incorrect columns. See documentation")
   }
@@ -48,7 +48,7 @@ get_gaps <- function(unit_table){
     #add transitions column
     trans = add_transitions(note_table)$transitions[1:nrow(note_table)-1]
     res = tibble::tibble( sound.files = note_table$sound.files[1], 
-                          gap_dur, pos = seq(length(gap_dur)),
+                          gap_dur, selec = seq(length(gap_dur)),
                           transitions = trans)
     return(res)
   })

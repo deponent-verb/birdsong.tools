@@ -8,7 +8,7 @@
 #' @return A unit table with a transitions column. 
 #' @export
 #'
-#' @examples unit_table = tibble::tibble(start = c(0.37, 0.6, 0.2, 1.8), end = c(0.45, 0.7, 0.4, 2), pos = c(1,2,3,4),sound.files ="JS001.wav" , note_label = "Curve")
+#' @examples unit_table = tibble::tibble(start = c(0.37, 0.6, 0.2, 1.8), end = c(0.45, 0.7, 0.4, 2), selec = c(1,2,3,4),sound.files ="JS001.wav" , note_label = "Curve")
 #' add_transitions_dep(unit_table)
 add_transitions_dep <- function(table){
 
