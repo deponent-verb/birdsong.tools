@@ -1,8 +1,10 @@
 #' identify_intro function
 #' 
 #' Takes a unit table and identifies the notes that are part of the introduction. 
-#' An introduction are a contiguous sequence of notes at the beginning of a song,
-#' which are less than 0.25s apart. The introductions cut off after 5 notes. 
+#' The first note is always part of the introduction. Subsequent notes are included
+#' into the introduction until there are at least 5 continguous notes which are 
+#' <0.25s apart. 
+#' 
 #'
 #' @param unit_table: A unit table tibble containing the original sound file, 
 #' start/end times of the note,the note position and note_label. 
